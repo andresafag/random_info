@@ -1,0 +1,15 @@
+{% extends 'selection.html' %}
+
+{% block title %}addresses{% endblock %}
+
+{% block content %}
+    <select>
+        <option value="whole_address">Complete address</option>
+        <option value="city">City</option>
+        <option value="country">Country code</option>
+        <option value="state">State</option>
+        <option value="street_address">Street address</option>
+    </select>
+    <input placeholder="quantity of the data">
+    <input type="button" value="GENERATE">
+{% endblock %}

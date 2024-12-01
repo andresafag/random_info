@@ -1,0 +1,13 @@
+{% extends 'selection.html' %}
+
+{% block title %}Names{% endblock %}
+
+{% block content %}
+    <select>
+        <option value="first_name">First name</option>
+        <option value="last_name">Last name</option>
+        <option value="full_name">Full name</option>
+    </select>
+    <input placeholder="quantity of the data">
+    <input type="button" value="GENERATE">
+{% endblock %}
