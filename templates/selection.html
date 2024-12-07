@@ -12,5 +12,30 @@
     <h2>Choose which data you'd go for</h2>
       {% block content %}{% endblock %}    
   </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+      let generate=document.querySelector("#generator")
+      let selection=document.querySelectorAll(".data")
+      let chosen=''
+
+      for (let index = 0; index < selection.length; index++) {
+        selection[index].addEventListener("click", (e)=>{
+          console.log(e.target.textContent)
+          chosen=e.target.textContent
+      })
+
+      }
+      
+      generate.addEventListener("click", function () {
+        let data=chosen.split(" ").join("_").toLowerCase()
+        let digit=document.querySelector("#number").value
+        if (data=="full_name") {
+          data="name"
+        }
+        alert("es " + digit)
+        
+        window.location=`${data}/${digit}`
+      })
+    </script>
   </body>
 </html>
