@@ -17,24 +17,54 @@
       let generate=document.querySelector("#generator")
       let selection=document.querySelectorAll(".data")
       let chosen=''
-
+      
       for (let index = 0; index < selection.length; index++) {
         selection[index].addEventListener("click", (e)=>{
-          console.log(e.target.textContent)
           chosen=e.target.textContent
       })
 
       }
       
       generate.addEventListener("click", function () {
-        let data=chosen.split(" ").join("_").toLowerCase()
-        let digit=document.querySelector("#number").value
-        if (data=="full_name") {
-          data="name"
+/*
+        if (selection[1].textContent.includes("between")) {
+          console.log(selection[1])
+          let start_date=selection[1].childNodes[1].value
+          let end_date=selection[1].childNodes[3].value
+          console.log("start date is: " + start_date + " and end date is: " + end_date)
+          let digit=document.querySelector("#number").value
+          window.location=`${data}/${digit}`
         }
-        alert("es " + digit)
-        
-        window.location=`${data}/${digit}`
+
+
+        if(document.title !=="Dates"){
+          let data=chosen.split(" ").join("_").toLowerCase()
+          let digit=document.querySelector("#number").value
+          if (data=="first_name") {
+            data="name"
+            print(data)
+            window.location=`${data}/${digit}`
+          } else {
+            window.location=`${data}/${digit}`
+          }
+          
+        } else {
+          let data=chosen.split(" ").join("_").toLowerCase()
+          let digit=document.querySelector("#number").value
+          alert("es " + digit)
+          window.location=`${data}/${digit}`
+        }
+
+        if (chosen.toLowerCase() == "date this year" || chosen.toLowerCase() == "date this month" || chosen.toLowerCase() == "date") {
+          let data=chosen.split(" ").join("_").toLowerCase()
+          let digit=document.querySelector("#number").value
+          window.location=`${data}/${digit}`
+        }
+*/
+
+
+           
+
       })
     </script>
   </body>

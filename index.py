@@ -1,8 +1,9 @@
 from flask import Flask, render_template
 from faker import Faker
+import datetime
 
 fake=Faker()
-list=("name","address","calendar","text","credit_card","email","phone_number","colors","company")
+list=("name","address","date","text","credit_card","email","phone_number","colors","company")
 app = Flask(__name__)
 length=len(list)
 
@@ -19,9 +20,23 @@ def selection(selection):
 
 @app.route("/allow/<results>/<int:digit>")
 def results(results, digit):
+    """
     instances=[getattr(fake,results)() for i in range(digit)]
-    print(instances)
-    return render_template("results.html", results=instances, digit=digit) 
+    instancess=[]
+        
+    
+    for i in instances:
+        if(isinstance(i, datetime.date)):
+            instancess.append(i.strftime("%Y-%m-%d"))  
+        else:
+            instancess=instances
+              
+    
+    
+    return render_template("results.html", results=instancess, digit=digit) 
+    """
+    return results
+
 
 
 if __name__ == '__main__':

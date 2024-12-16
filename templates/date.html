@@ -1,22 +1,26 @@
 {% extends 'selection.html' %}
 
-{% block title %}addresses{% endblock %}
+{% block title %}Dates{% endblock %}
 
 {% block content %}
-# city, country code, state, street address
+# random dates, dates between x and y,  dates this month year decase months and century, time
  <div class="container text-center">
         <div class="row">
         <div class="col border distance">
-            <button type="button" class="btn btn-light height-btn data">City</button>
+            <button type="button" class="btn btn-light height-btn data">Date</button>
         </div>
         <div class="col border distance">
-            <button type="button" class="btn btn-light height-btn data">Country code</button>
+            <button type="button" class="btn btn-light height-btn data">Dates between  <input type="date"> and <input type="date"> </button>
+            
         </div>
         <div class="col border distance">
-            <button type="button" class="btn btn-light height-btn data">Street name</button>
+            <button type="button" class="btn btn-light height-btn data">Date this month</button>
         </div>
         <div class="col border distance">
-            <button type="button" class="btn btn-light height-btn data">Street address</button>
+            <button type="button" class="btn btn-light height-btn data">Date this year</button>
+        </div>
+        <div class="col border distance">
+            <button type="button" class="btn btn-light height-btn data">Date this decade</button>
         </div>
         </div>
     </div>
