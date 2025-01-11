@@ -9,9 +9,30 @@
   </head>
   <body>
   <div id="content">
-    <p>{{results}}</p>
+    <span hidden id="results">{{results}}</span>
+      {% for result in results %}
+        <li hidden class="item">{{ result | replace("[", "") | replace("]", "") | replace("'", "") }}</li>
+      {% endfor %}
+    {% for result in results %}
+      <p>{{ result | replace("[", "") | replace("]", "") | replace("'", "") }}</p>
+    {% endfor %}
     <p>{{digit}}</p>
+    <input type="button" value="download" id="download">
   </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+      document.querySelector('#download').addEventListener('click', () => {
+        let results = document.querySelectorAll('.item')
+        let resultsList = []
+        for (let i = 0; i < results.length; i++) {
+          let items = results[i].textContent
+          items = items.replace(/\\n/g," ").replace(/\//g,":")
+          console.log(items)
+          resultsList.push(items)}        
+          console.log(JSON.stringify(resultsList))  
+        let url = '/download/' + encodeURIComponent(JSON.stringify(resultsList));
+        window.location.href = url;
+      });
+    </script>
   </body>
 </html>
