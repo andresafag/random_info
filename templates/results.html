@@ -13,11 +13,18 @@
       {% for result in results %}
         <li hidden class="item">{{ result | replace("[", "") | replace("]", "") | replace("'", "") }}</li>
       {% endfor %}
-    {% for result in results %}
-      <p>{{ result | replace("[", "") | replace("]", "") | replace("'", "") }}</p>
-    {% endfor %}
-    <p>{{digit}}</p>
-    <input type="button" value="download" id="download">
+      
+      {% for result in results %}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">{{ result | replace("[", "") | replace("]", "") | replace("'", "") }}</th>
+            </tr>
+          </thead>
+        </table>
+      {% endfor %}
+   
+    <input type="button" value="download in cvs format" id="download">
   </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>

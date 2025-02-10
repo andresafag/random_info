@@ -10,7 +10,6 @@
   display : flex;
   align-items : center;
   justify-content : center;
-  flex-warp : warp;
   padding : 30px;  
 }
 
@@ -20,28 +19,44 @@
   height : 215px;  
   background-color : #fff;
   margin : 30px 10px;
-  padding : 20px 15px;
-  
+  padding : 20px 15px;  
   display : flex;
   flex-direction : column;
   box-shadow : 0 5px 20px rgba(0,0,0,0.5);
   transition : 0.3s ease-in-out;
   border-radius : 15px;
 }
+
 .card-container .cards:hover {
-  height : 320px;    
+  height : 270px;    
 }
 
+.table {
+    max-width: 50%;
+    width: auto;
+}
+
+.table-striped {
+  text-align: center;
+  width: 50%;
+  margin: auto;
+  table-layout: fixed;
+}
+
+.input-container {
+  text-align: center;
+  margin: 5px;
+}
 
 .card-container .cards .image {
   position : relative;
   width : 260px;
-  height : 260px;
-  
+  height : 260px; 
   top : -40%;
   left: 8px;
-  box-shadow : 0 5px 20px rgba(0,0,0,0.2);
+/*  box-shadow : 0 5px 20px rgba(0,0,0,0.2); */
   z-index : 1;
+  border-radius: 15px;
 }
 
 .card-container .cards .image img {
@@ -56,7 +71,6 @@
   padding : 10px 15px;
   color : #111;
   text-align : center;
-  
   visibility : hidden;
   opacity : 0;
   transition : 0.3s ease-in-out;
@@ -76,8 +90,16 @@
 
 #content {
   border: 1px solid black;
-  width: 80vw;
+  width: 100vw;
+  min-height: 100vh;
+  height: fit-content;
   margin: auto;
+  background-color: #b29cdf78;
+}
+
+#content div h2 {
+  text-align: center;
+  margin: 20px;
 }
 
 .distance {

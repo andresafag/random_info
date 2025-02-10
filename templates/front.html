@@ -18,7 +18,7 @@
 
     <div class="container text-center">
       <div class="row">
-      {% for category in  range(0,length) %}
+      {% for category in  range(lista|length) %}
           <div class="col hover"> 
            <div class = "card-container">
     <div class = "cards">
@@ -27,7 +27,7 @@
       </div>
       <div class = content>
         <h3>{{lista[category]}}</h3>
-        <p>{{category}}</p>
+        <p>{{list_items_description[category]}}</p>
       </div>
     </div>    
   </div>

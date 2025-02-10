@@ -18,70 +18,50 @@
       let generate=document.querySelector("#generator")
       let selection=document.querySelectorAll(".data")
       let chosen=''
+      let dateChosenStart = ''
+      let dateChosenEnd = '' 
+      let previousId = ''
+
+      let num = document.getElementById('number')
+      num.max = 100;
 
       // add event listener to the selection
-      for (let index = 0; index < selection.length; index++) {
-        selection[index].addEventListener("click", (e)=>{
-          chosen=e.srcElement.id
-      })
-
+      for (let index = 0; index < selection.length; index++) {         
+            selection[index].addEventListener("click", (e)=>{
+              if (e.srcElement.id == "start" || e.srcElement.id == "end" || e.srcElement.id == "date_between") {
+                chosen="date_between"
+              } else {
+                chosen = e.srcElement.id 
+                e.srcElement.style.backgroundColor = '#c92d9b'; 
+                previousId.length > 0 ? document.querySelector("#" + previousId).style.backgroundColor = 'white' : {}   
+                previousId = chosen
+              }
+            })
       }
+
+      if(document.title == "Dates"){
+        let start = document.querySelector('#start')
+        let end = document.querySelector('#end')
+
+        start.addEventListener('change', function () {
+          dateChosenStart = this.value
+        })
+      
+      
+        end.addEventListener('change', function () {
+          dateChosenEnd = this.value
+        })
+      }        
       
       // add event listener to the generate button
       generate.addEventListener("click", function () {
-      console.log(chosen)
-      console.log("this is the digit value " + document.querySelector("#number").value)
-      window.location=`${chosen}/${document.querySelector("#number").value}`
-
-
-
-
-
-
-/*
-
-        if (selection[1].textContent.includes("between")) {
-          console.log(selection[1])
-          let start_date=selection[1].childNodes[1].value
-          let end_date=selection[1].childNodes[3].value
-          console.log("start date is: " + start_date + " and end date is: " + end_date)
-          let digit=document.querySelector("#number").value
-          window.location=`${data}/${digit}`
-        }
-
-
-        if(document.title !=="Dates"){
-          let data=chosen.split(" ").join("_").toLowerCase()
-          let digit=document.querySelector("#number").value
-          if (data=="first_name") {
-            data="name"
-            print(data)
-            window.location=`${data}/${digit}`
+          if (chosen == "date_between" && num.value < 101) {
+            window.location=`${chosen}/${num.value}/${dateChosenStart}/${dateChosenEnd}/`  
+          } else if (chosen != "date_between" && num.value < 101) {
+            window.location=`${chosen}/${num.value}`
           } else {
-            window.location=`${data}/${digit}`
+            num.value > 100 ? alert("change the value of instances") : {}
           }
-          
-        } else {
-          let data=chosen.split(" ").join("_").toLowerCase()
-          let digit=document.querySelector("#number").value
-          alert("es " + digit)
-          window.location=`${data}/${digit}`
-        }
-
-        if (chosen.toLowerCase() == "date this year" || chosen.toLowerCase() == "date this month" || chosen.toLowerCase() == "date") {
-          let data=chosen.split(" ").join("_").toLowerCase()
-          let digit=document.querySelector("#number").value
-          window.location=`${data}/${digit}`
-        }
-   
-
-
-          let data=chosen.split(" ").join("_").toLowerCase()
-          let digit=document.querySelector("#number").value
-          alert("es " + digit)
-          window.location=`${data}/${digit}`
-
-*/
       })
     </script>
   </body>

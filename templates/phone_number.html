@@ -1,6 +1,6 @@
 {% extends 'selection.html' %}
 
-{% block title %}addresses{% endblock %}
+{% block title %}Phone numbers{% endblock %}
 
 {% block content %}
 
@@ -11,6 +11,12 @@
         </div>
         </div>
     </div>
-    <input id="generator" type="button" value="GENERATE"> <input id="number" type="number" placeholder="enter digit"> <span>instances</span>
+    <div class="input-container">
+        <input id="generator" type="button" value="GENERATE">
+    </div>
+    <div class="input-container">
+        <input id="number" type="number" placeholder="enter digit"> 
+        <span>instances</span>
+    </div>
 
 {% endblock %}
