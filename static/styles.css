@@ -97,10 +97,11 @@
   background-color: #b29cdf78;
 }
 
-#content div h2 {
+#content div h2, div p, #content h2 {
   text-align: center;
   margin: 20px;
 }
+
 
 .distance {
   margin-right: 30px;
@@ -108,4 +109,24 @@
 
 .height-btn {
   height: 60px;
+}
+
+.oswald-font {
+  font-family: "Oswald", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.anton-regular {
+  font-family: "Anton", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.raleway-font {
+  font-family: "Raleway", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
 }
