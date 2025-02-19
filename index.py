@@ -6,8 +6,6 @@ from helpers import name
 import json
 import urllib.parse
 
-
-fake=Faker()
 list=("name","address","date","text","credit_card","email","phone_number","colors","company")
 list_items_description=("When running out of creativity when it comes to come up with names this is the best option","Address can be complicated so this is the right tool for you","Date","There exist thousands of words in the world so what better way than clicking on this","Credit card information is a repetitive task that can end up being cumbersome before this came along","Randomized email@whatever will be found here","Phone Numbers of any kind","Colors in various formats","Company of every kind")
 app = Flask(__name__)
@@ -26,8 +24,9 @@ def selection(selection):
     else:
         return render_template(selection+".html", selection=selection)        
 
-@app.route("/allow/<results>/<int:digit>")
-def results(results, digit):
+@app.route("/allow/<results>/<int:digit>/<locale>")
+def results(results, digit, locale):
+    fake=Faker(locale)
     instancess=[]
     instances=[getattr(fake,results)() for i in range(digit)]
        
@@ -38,6 +37,7 @@ def results(results, digit):
 
 @app.route("/allow/<results>/<int:digit>/<start>/<end>/")
 def resultsbetween(results, digit,start,end):
+    fake=Faker()
     instancess=[]
     startDate = datetime.datetime.strptime(start, "%Y-%m-%d").date()
     endDate = datetime.datetime.strptime(end, "%Y-%m-%d").date()
