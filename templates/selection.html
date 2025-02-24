@@ -11,7 +11,7 @@
     <h2>Choose which data you'd go for</h2>
       <div>
         {% raw %}
-            <select name="" id="">
+            <select>
                 <option value="af_ZA">Afrikaans (South Africa)</option>
                 <option value="ar">Arabic</option>
                 <option value="az">Azerbaijani</option>
@@ -20,7 +20,7 @@
                 <option value="de">German</option>
                 <option value="de_AT">German (Austria)</option>
                 <option value="dv">Maldivian</option>
-                <option value="en">English</option>
+                <option value="en" selected>English</option>
                 <option value="en_AU">English (Australia)</option>
                 <option value="en_GB">English (Great Britain)</option>
                 <option value="en_IE">English (Ireland)</option>
@@ -66,6 +66,8 @@
       let dateChosenStart = ''
       let dateChosenEnd = '' 
       let previousId = ''
+
+      document.title == "Dates" ? document.querySelector('select').remove() : {}
 
       let num = document.getElementById('number')
       num.max = 100;
