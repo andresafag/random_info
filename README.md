@@ -9,6 +9,7 @@
 
 
 
+
 ## Random Info Webpage 
 
 This project is a simple webpage that provides random information about several categories.
