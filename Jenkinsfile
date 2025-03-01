@@ -15,9 +15,6 @@ pipeline {
             }
         }
         stage('Deploy') {
-            agent {
-            label 'andres_label'
-            }
             steps {
                 echo 'Deploying...'
             }
