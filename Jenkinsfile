@@ -5,6 +5,14 @@ pipeline {
         }
     }
     stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out...'
+                // Add your checkout steps here
+                
+                git credentialsId: 'b5612281-71cc-4d12-8268-75b4105117d2', url: 'https://github.com/andresafag/random_info.git'
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building...'
