@@ -10,7 +10,7 @@ pipeline {
                 echo 'Checking out...'
                 // Add your checkout steps here
                 
-                git credentialsId: 'b5612281-71cc-4d12-8268-75b4105117d2', url: 'https://github.com/andresafag/random_info.git'
+                git credentialsId: '95007d8f-9558-40e2-ba29-0d28917757f7', url: 'https://github.com/andresafag/random_info.git'
             }
         }
         stage('Build') {
