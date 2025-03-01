@@ -2,12 +2,10 @@ pipeline {
     agent {
         label 'andres_label'
     }
-    parameters{
-        credentials(name: '95007d8f-9558-40e2-ba29-0d28917757f7', credentialType: 'Secret text')
-    }
     stages { 
         stage('Build') {
             steps {
+                withcredentials([string(credentialsId: '95007d8f-9558-40e2-ba29-0d28917757f7')])
                 echo 'Building...'
                 // Add your build steps here
             }
