@@ -9,7 +9,6 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                // Add your test steps here
             }
         }
         stage('Deploy') {
