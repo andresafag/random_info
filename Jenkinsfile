@@ -1,8 +1,6 @@
 pipeline {
     agent {
-        node {
-            label 'andres_label'
-        }
+        label 'andres_label'
     stages {
         stage('Checkout') {
             steps {
