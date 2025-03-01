@@ -1,15 +1,15 @@
 pipeline {
-    agent {
-        label 'andres_label'
-    }
+    agent any
     stages { 
         stage('Build') {
             steps {
                 echo 'Building... and go'
-                //hola
             }
         }
         stage('Test') {
+                agent {
+                    label 'andres_label'
+                }
             steps {
                 echo 'Testing...'
             }
