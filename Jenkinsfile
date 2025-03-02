@@ -4,11 +4,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building... and go'
+                sh 'echo "Hello World"'
+                sh 'echo $PATH'
             }
         }
         stage('Test') {
                 agent {
-                    label 'andres_label'
+                    label 'original'
                 }
             steps {
                 echo 'Testing...'
