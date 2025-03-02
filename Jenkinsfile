@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building... and go'
-                echo %PATH%
+                echo '%PATH%'
             }
         }
         stage('Test') {
