@@ -9,10 +9,12 @@ pipeline {
         }
         stage('Test') {
                 agent {
-                    label 'original'
+                    docker {
+                        image 'maven:3-alpine'
+                    }
                 }
             steps {
-                echo 'Testing...'
+                mvn --version
             }
         }
         stage('Deploy') {
