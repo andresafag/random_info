@@ -4,7 +4,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building... and go'
-                sh 'pip list'
+                sh 'python3 -m venv env'
+                sh 'source env/bin/activate'
+                sh 'pip install selenium'
             }
         }
         stage('Test') {
