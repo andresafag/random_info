@@ -5,8 +5,7 @@ pipeline {
             steps {
                 echo 'Building... and go'
                 sh 'python3 -m venv env'
-                sh 'ls'
-                sh '. env/bin/activate'
+                sh '. env/Scripts/activate'
                 sh 'pip install selenium'
             }
         }
