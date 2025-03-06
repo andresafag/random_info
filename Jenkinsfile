@@ -8,13 +8,8 @@ pipeline {
             }
         }
         stage('Test') {
-                agent {
-                    docker {
-                        image 'node:23-alpine3.20'
-                    }
-                }
             steps {
-                node --version
+                sh 'python testing_page.py'
             }
         }
         stage('Deploy') {
