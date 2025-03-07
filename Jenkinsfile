@@ -5,8 +5,8 @@ pipeline {
             steps {
                 echo 'Building... and go'
                 sh '. env/Scripts/activate'
-                sh 'ls'
                 sh 'cd test'
+                sh 'ls'
                 sh 'pytest test_page.py'
             }
         }
