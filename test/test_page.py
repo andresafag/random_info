@@ -16,7 +16,7 @@ def test_add():
     assert sum.add(2, 3) == 5
     assert sum.add(-1, 1) == 0
     assert sum.add(0, 0) == 0
-    assert sum.add(1, 3) == 10
+    assert sum.add(1, 3) == 4
 
 if __name__ == "__main__":
     pytest.main()

@@ -5,7 +5,6 @@ pipeline {
             steps {
                 echo 'Building... and go'
                 sh '. env/Scripts/activate'
-                sh 'pip install pytest-xml'
                 sh 'python -m pytest --junitxml=report.xml'
             }
         }
