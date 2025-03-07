@@ -1,11 +1,17 @@
 # import selenium.webdriver
-# from selenium.webdriver.common.by import By
+# from selenium.webdriver.common.by import Bom the root foldery
 # from selenium.webdriver.chrome.options import Options
 # from selenium.webdriver.support.ui import Select
 
 import pytest
-
+import sys
+import os
 from sum import add
+
+# Add the root folder to the system path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# Import the add function from sum.py
 
 def test_add():
     assert add(2, 3) == 5
