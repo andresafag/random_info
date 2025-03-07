@@ -1,13 +1,28 @@
-import selenium.webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import Select
+# import selenium.webdriver
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.chrome.options import Options
+# from selenium.webdriver.support.ui import Select
 
-chrome_options = Options()
-chrome_options.add_argument("--headless=new")
-driver = selenium.webdriver.Chrome(options=chrome_options)
+import pytest
+from sum import add
 
-print("aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiii ------------------------------")
+def test_add():
+    assert add(2, 3) == 5
+    assert add(-1, 1) == 0
+    assert add(0, 0) == 0
+
+if __name__ == "__main__":
+    pytest.main()
+
+
+
+
+
+# chrome_options = Options()
+# chrome_options.add_argument("--headless=new")
+# driver = selenium.webdriver.Chrome(options=chrome_options)
+
+# print("aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiii ------------------------------")
 # start_url = "http://localhost:8000"
 # driver.get(start_url)
 
