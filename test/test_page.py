@@ -1,4 +1,4 @@
-from ..sum import add
+from sum import add
 # import selenium.webdriver
 # from selenium.webdriver.common.by import Bom the root foldery
 # from selenium.webdriver.chrome.options import Options

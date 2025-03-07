@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'pytest'
+                sh 'pytest test/*'
             }
         }
         stage('Deploy') {
