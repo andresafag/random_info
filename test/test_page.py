@@ -2,8 +2,7 @@ print("Hello World")
 
 
 import pytest
-from ..sum import add
-
+from sum import add
 # import selenium.webdriver
 # from selenium.webdriver.common.by import Bom the root foldery
 # from selenium.webdriver.chrome.options import Options
@@ -19,7 +18,8 @@ def test_add():
     assert add(-1, 1) == 0
     assert add(0, 0) == 0
 
-test_add()
+if __name__ == "__main__":
+    pytest.main()
 
 
 
