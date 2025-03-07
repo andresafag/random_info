@@ -5,7 +5,6 @@ pipeline {
             steps {
                 echo 'Building... and go'
                 sh '. env/Scripts/activate'
-                sh 'pip install pytest'
             }
         }
         stage('Test') {
