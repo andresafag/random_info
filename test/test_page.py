@@ -2,7 +2,7 @@ print("Hello World")
 
 
 import pytest
-import sum
+from sum import add
 # import selenium.webdriver
 # from selenium.webdriver.common.by import Bom the root foldery
 # from selenium.webdriver.chrome.options import Options
@@ -13,10 +13,10 @@ import sum
 
 
 def test_add():
-    assert sum.add(2, 3) == 5
-    assert sum.add(-1, 1) == 0
-    assert sum.add(0, 0) == 0
-    assert sum.add(1, 3) == 5
+    assert add(2, 3) == 5
+    assert add(-1, 1) == 0
+    assert add(0, 0) == 0
+    assert add(1, 3) == 4
 
 if __name__ == "__main__":
     pytest.main()
