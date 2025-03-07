@@ -9,6 +9,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                sh 'ls'
                 sh 'pytest test/test_page.py'
             }
         }
