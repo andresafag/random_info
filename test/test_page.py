@@ -1,10 +1,11 @@
+from ..sum import add
 # import selenium.webdriver
 # from selenium.webdriver.common.by import Bom the root foldery
 # from selenium.webdriver.chrome.options import Options
 # from selenium.webdriver.support.ui import Select
 
 import pytest
-from ..sum import add
+
 
 
 def test_add():
