@@ -13,7 +13,7 @@ pipeline {
                 sh '''
                 . env/Scripts/activate
                 ls
-                pytest 
+                python -m pytest 
                 '''
             }
         }
