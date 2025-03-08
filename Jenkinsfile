@@ -12,7 +12,7 @@ pipeline {
                 echo 'Testing...'
                 sh '''
                 . env/Scripts/activate
-                pytest
+                pytest 
                 '''
             }
         }
