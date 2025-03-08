@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo 'Building... and go'
                 sh '. env/Scripts/activate'
-                sh "which python"
+                sh "pip list"
             }
         }
         stage('Test') {
