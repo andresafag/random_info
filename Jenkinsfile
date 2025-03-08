@@ -5,9 +5,7 @@ pipeline {
             steps {
                 echo 'Building... and go'
                 sh '. env/Scripts/activate'
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                sh 'python -m pytest --junitxml=report.xml'
-                }
+                echo "${env.VIRTUAL_ENV}"
             }
         }
         stage('Test') {
