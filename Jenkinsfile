@@ -9,8 +9,8 @@ pipeline {
             steps {
                 echo 'Building... and go'
                 echo "building"                
-                echo '${GITHUB_URL}'
-                echo 'y el estado del repo es ${DEPLOY}'
+                echo "${GITHUB_URL}"
+                echo 'y el estado del repo es "${DEPLOY}"'
             }
         }
         stage('Test') {
