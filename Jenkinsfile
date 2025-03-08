@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    environment {
-        STATUS = ""
+        environment {
+        NEXT_STAGE = ""
     }
     parameters {
         string(name: 'GITHUB_URL', defaultValue: 'la direccion de github es https://github.com/andresafag/random_info', description: 'URL of the repository')
@@ -19,7 +19,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                script {
+                    script {
                     try {
                         sh '''
                             . env/Scripts/activate
@@ -27,11 +27,13 @@ pipeline {
                             python -m pytest 
                             which python
                         '''
+                        env.STATUS = "SUCCESS"
+                        echo "este es el status actual ${env.STATUS}"
                     } catch (Exception e) {
-                        env.STATUS="FAILURE"
+                        env.STATUS = "FAILURE"
+                        echo "este es el status actual ${env.STATUS}"
                     }
                 }
-                
             }
         }
         stage('Deploy') {
