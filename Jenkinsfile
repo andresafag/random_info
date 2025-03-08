@@ -5,10 +5,12 @@ pipeline {
             steps {
                 echo 'Building... and go'
                 // Activate the virtual environment
-                sh 'python3 -m venv env'
-                sh 'env/Scripts/activate'
-                sh "pip list"
-                sh 'which python'
+                 sh '''
+                . env/Scripts/activate
+                pip install pytest
+                pytest --version
+                which python
+                '''
             }
         }
         stage('Test') {
