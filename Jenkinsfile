@@ -24,4 +24,5 @@ pipeline {
             }
         }
     }
+post { failure { echo 'this build failed' } }
 }
