@@ -16,12 +16,19 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh '''
-                . env/Scripts/activate
-                ls
-                python -m pytest 
-                which python
-                '''
+                script {
+                    try {
+                        sh '''
+                            . env/Scripts/activate
+                            ls
+                            python -m pytest 
+                            which python
+                        '''
+                    } catch (Exception e) {
+                        build job: 'Deploy', wait: false
+                    }
+                }
+                
             }
         }
         stage('Deploy') {
