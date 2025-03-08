@@ -14,6 +14,7 @@ pipeline {
                 . env/Scripts/activate
                 ls
                 python -m pytest 
+                which python
                 '''
             }
         }
