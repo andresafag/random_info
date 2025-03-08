@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo 'Building... and go'
                 sh '. env/Scripts/activate'
-                echo "${env.VIRTUAL_ENV}"
+                echo "${VIRTUAL_ENV}"
             }
         }
         stage('Test') {
