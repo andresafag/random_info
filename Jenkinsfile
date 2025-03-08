@@ -27,7 +27,6 @@ pipeline {
                             python -m pytest 
                             which python
                         '''
-                        env.STATUS="SUCCESS"
                     } catch (Exception e) {
                         env.STATUS="FAILURE"
                     }
@@ -37,7 +36,7 @@ pipeline {
         }
         stage('Deploy') {
             when {
-                expression {  env.STATUS == "SUCCESS" }
+                expression {  env.STATUS == "FAILURE" }
             }
             steps {
                 echo 'Deploying...successfully'
