@@ -4,18 +4,16 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building... and go'
-                // Activate the virtual environment
-                 sh '''
-                . env/Scripts/activate
-                pip install pytest
-                pytest --version
-                which python
-                '''
+                echo "building"                
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing...'
+                sh '''
+                . env/Scripts/activate
+                pytest
+                '''
             }
         }
         stage('Deploy') {
