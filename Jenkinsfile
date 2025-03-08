@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        STATUS = ""
+    }
     parameters {
         string(name: 'GITHUB_URL', defaultValue: 'la direccion de github es https://github.com/andresafag/random_info', description: 'URL of the repository')
         booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Deploy after build?')
@@ -24,16 +27,20 @@ pipeline {
                             python -m pytest 
                             which python
                         '''
+                        env.STATUS="SUCCESS"
                     } catch (Exception e) {
-                        build job: 'Deploy', wait: false
+                        env.STATUS="FAILURE"
                     }
                 }
                 
             }
         }
         stage('Deploy') {
+            when {
+                expression {  env.STATUS == "SUCCESS" }
+            }
             steps {
-                echo 'Deploying...'
+                echo 'Deploying...successfully'
             }
         }
     }
