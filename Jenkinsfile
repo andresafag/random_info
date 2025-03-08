@@ -27,18 +27,20 @@ pipeline {
                             python -m pytest 
                             which python
                         '''
-                        env.STATUS = "SUCCESS"
-                        echo "este es el status actual ${env.STATUS}"
+//                        env.STATUS = "SUCCESS"
+//                        echo "este es el status actual ${env.STATUS}"
                     } catch (Exception e) {
-                        env.STATUS = "FAILURE"
-                        echo "este es el status actual ${env.STATUS}"
+                        currentBuild.result = 'FAILURE'
+                        error('Error: ${e}')
+//                        env.STATUS = "FAILURE"
+//                        echo "este es el status actual ${env.STATUS}"
                     }
                 }
             }
         }
         stage('Deploy') {
             when {
-                expression {  env.STATUS == "FAILURE" }
+                expression {  currentBuild.result == "FAILURE" }
             }
             steps {
                 echo 'Deploying...successfully'
