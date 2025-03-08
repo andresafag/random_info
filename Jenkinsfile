@@ -5,7 +5,8 @@ pipeline {
             steps {
                 echo 'Building... and go'
                 // Activate the virtual environment
-                bat '\\env\\Scripts\\activate'
+                sh 'python3 -m venv env'
+                sh 'env/Scripts/activate'
                 sh "pip list"
                 sh 'which python'
             }
