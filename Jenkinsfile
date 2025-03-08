@@ -31,7 +31,8 @@ pipeline {
 //                        echo "este es el status actual ${env.STATUS}"
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
-                        error('Error: ${e}')
+                        echo "este es el error ${e}"
+                        
 //                        env.STATUS = "FAILURE"
 //                        echo "este es el status actual ${env.STATUS}"
                     }
