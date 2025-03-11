@@ -1,8 +1,5 @@
 pipeline {
     agent any
-        environment {
-        NEXT_STAGE = ""
-    }
     parameters {
         string(name: 'GITHUB_URL', defaultValue: 'la direccion de github es https://github.com/andresafag/random_info', description: 'URL of the repository')
         booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Deploy after build?')
@@ -45,7 +42,7 @@ pipeline {
                 expression {  currentBuild.result == "FAILURE" }
             }
             steps {
-                echo 'Deploying...successfully'
+                echo 'Deploying...failing'
             }
         }
             stage('Deploysuccess') {
@@ -58,7 +55,7 @@ pipeline {
         }
     }
 post { 
-    success { echo 'this build was successful' }
+    success {   slackSend channel: '#all-devops-team', message: "Build ${currentBuild.fullDisplayName} finished with status: ${currentBuild.currentResult}" }
     failure { echo 'this build failed' }   
  }
 }
