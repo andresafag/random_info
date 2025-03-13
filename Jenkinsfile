@@ -1,8 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'GITHUB_URL', defaultValue: 'la direccion de github es https://github.com/andresafag/random_info', description: 'URL of the repository')
-        booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Deploy after build?')
+        string(name: 'prueba', defaultValue: 'pruebita')
         }
     stages { 
         stage('Build') {
@@ -16,46 +15,22 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                    script {
-                    try {
-                        sh '''
-                            . env/Scripts/activate
-                            ls
-                            python -m pytest 
-                            which python
-                        '''
-                        currentBuild.result = 'SUCCESS'
-//                        env.STATUS = "SUCCESS"
-//                        echo "este es el status actual ${env.STATUS}"
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        echo "este es el error ${e}"
-
-//                        env.STATUS = "FAILURE"
-//                        echo "este es el status actual ${env.STATUS}"
-                    }
                 }
             }
         }
         stage('Deploy') {
             when {
-                expression {  currentBuild.result == "FAILURE" }
+                allOf {
+                    branch 'main'
+                    environment name: 'prueba', value: 'pruebita'
+                }
             }
             steps {
                 echo 'Deploying...failing'
             }
         }
-            stage('Deploysuccess') {
-            when {
-                expression {  currentBuild.result == "SUCCESS" }
-            }
-            steps {
-                echo 'Deploying...successfully'
-            }
-        }
-    }
 post { 
-    success {   slackSend channel: '#all-devops-team', message: "Build ${currentBuild.fullDisplayName} finished with status: ${currentBuild.currentResult}" }
+    success {  echo 'this build was successful' }
     failure { echo 'this build failed' }   
  }
 }
