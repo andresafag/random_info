@@ -18,7 +18,7 @@ pipeline {
     
         stage('Deploy') {
             when {
-                anyOf {
+                allOf {
                     environment name: 'DEPLOY_ENV', value: 'staging'
                     expression { params.prueba == 'pruebita'}
                     expression { env.BRANCH_NAME == 'main' }
