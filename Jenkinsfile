@@ -1,5 +1,8 @@
 pipeline {
     agent any
+        environment {
+        DEPLOY_ENV = 'staging'
+    }
     parameters {
         string(name: 'prueba', defaultValue: 'pruebita')
         }
@@ -17,6 +20,7 @@ pipeline {
         stage('Deploy') {
             when {
                 allOf {
+                    environment name: 'DEPLOY_ENV', value: 'staging';
                     expression { params.prueba == 'pruebita'}
                 }
             }
