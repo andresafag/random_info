@@ -20,7 +20,7 @@ pipeline {
         stage('Deploy') {
             when {
                 allOf {
-                    environment name: 'DEPLOY_ENV', value: 'staging';
+                    environment name: 'DEPLOY_ENV', value: 'staging'
                     expression { params.prueba == 'pruebita'}
                 }
             }
