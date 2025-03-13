@@ -18,7 +18,9 @@ pipeline {
             when {
                 allOf {
                     branch 'main'
-                    environment name: 'prueba', value: 'pruebita'
+                    expression {
+                        return params.prueba == 'pruebita'
+                    }
                 }
             }
             steps {
