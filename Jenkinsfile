@@ -13,7 +13,7 @@ pipeline {
                 echo "y el estado del repo es ${DEPLOY}"
             }
         }
-    }
+    
         stage('Deploy') {
             when {
                 allOf {
@@ -25,6 +25,7 @@ pipeline {
                 echo 'Deploying...failing'
             }
         }
+    }
 post { 
     success {  echo 'this build was successful' }
     failure { echo 'this build failed' }   
