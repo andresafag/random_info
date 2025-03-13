@@ -12,7 +12,6 @@ pipeline {
             steps {
                 echo 'Building... and go'
                 echo "building"                
-                echo "y el estado del repo es ${DEPLOY}"
             }
         }
     
