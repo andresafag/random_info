@@ -17,7 +17,6 @@ pipeline {
         stage('Deploy') {
             when {
                 allOf {
-                    branch 'main'
                     expression {
                         return params.prueba == 'pruebita'
                     }
