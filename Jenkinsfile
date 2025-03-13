@@ -2,6 +2,7 @@ pipeline {
     agent any
         environment {
         DEPLOY_ENV = 'staging'
+        BRANCH_NAME = 'main'
     }
     parameters {
         string(name: 'prueba', defaultValue: 'pruebita')
@@ -26,6 +27,7 @@ pipeline {
             }
             steps {
                 echo 'Deploying...failing'
+                sh 'printenv'
             }
         }
     }
