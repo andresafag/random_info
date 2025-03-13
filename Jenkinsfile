@@ -23,6 +23,7 @@ pipeline {
                     environment name: 'DEPLOY_ENV', value: 'staging'
                     expression { params.prueba == 'pruebita'}
                     environment name: 'BRANCH_NAME', value: 'main'
+                    environment name: 'BUILD_NUMBER', value: '156'
                 }
             }
             steps {
