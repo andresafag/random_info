@@ -17,9 +17,7 @@ pipeline {
         stage('Deploy') {
             when {
                 allOf {
-                    expression {
-                        return params.prueba == 'pruebita'
-                    }
+                    expression { params.prueba == 'pruebita'}
                 }
             }
             steps {
