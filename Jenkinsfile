@@ -3,6 +3,7 @@ pipeline {
     parameters {
         string(name: 'prueba', defaultValue: 'pruebita')
         }
+
     stages { 
         stage('Build') {
             steps {
@@ -12,12 +13,12 @@ pipeline {
                 echo "y el estado del repo es ${DEPLOY}"
             }
         }
+    }
         stage('Test') {
             steps {
                 echo 'Testing...'
                 }
             }
-        }
         stage('Deploy') {
             when {
                 allOf {
