@@ -11,7 +11,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building... and go'
-                echo "building"                
+                echo "building"
+                echo "building...${env.BRANCH_NAME}"                 
             }
         }
     
