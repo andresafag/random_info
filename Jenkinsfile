@@ -20,7 +20,7 @@ pipeline {
                 allOf {
                     environment name: 'DEPLOY_ENV', value: 'staging'
                     expression { params.prueba == 'pruebita'}
-                    branch 'main'
+                    expression { env.BRANCH_NAME == 'main' }
                 }
             }
             steps {
