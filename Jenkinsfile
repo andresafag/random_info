@@ -31,7 +31,7 @@ pipeline {
             steps {
                 echo 'Deploying...failing'
                 sh '''
-                  aws rds describe-db-instances --region $AWS_DEFAULT_REGION --profile danielsso 
+                  aws rds describe-db-instances --region $AWS_DEFAULT_REGION --profile danielitosso 
                 '''
             }
         }
