@@ -3,6 +3,10 @@ pipeline {
         environment {
         DEPLOY_ENV = 'staging'
         BRANCH_NAME = 'main'
+        AWS_ACCESS_KEY_ID= credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY= credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_DEFAULT_REGION= 'us-east-2'
+        AWS_SESSION_TOKEN= credentials('AWS_SESSION_TOKEN')
     }
     parameters {
         string(name: 'prueba', defaultValue: 'pruebita')
@@ -11,15 +15,13 @@ pipeline {
     stages { 
         stage('Build') {
             steps {
-                echo 'Building... and go'
-                echo "building"
                 echo "building...${env.BRANCH_NAME}"                 
             }
         }
     
         stage('Deploy') {
             when {
-                allOf {
+                anyOf {
                     environment name: 'DEPLOY_ENV', value: 'staging'
                     expression { params.prueba == 'pruebita'}
                     environment name: 'BRANCH_NAME', value: 'main'
@@ -28,7 +30,11 @@ pipeline {
             }
             steps {
                 echo 'Deploying...failing'
-                sh 'printenv'
+                sh '''
+                  cd C:\Users\Andres\terra2\
+                  pwd
+                  terraform state list
+                '''
             }
         }
     }
