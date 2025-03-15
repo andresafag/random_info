@@ -31,7 +31,7 @@ pipeline {
             steps {
                 echo 'Deploying...failing'
                 sh '''
-                  cd C:\Users\Andres\terra2\
+                  cd C:/Users/Andres/terra2/
                   pwd
                   terraform state list
                 '''
