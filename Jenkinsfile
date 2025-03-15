@@ -3,10 +3,7 @@ pipeline {
         environment {
         DEPLOY_ENV = 'staging'
         BRANCH_NAME = 'main'
-        AWS_ACCESS_KEY_ID= credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY= credentials('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION= 'us-east-2'
-        AWS_SESSION_TOKEN= credentials('AWS_SESSION_TOKEN')
     }
     parameters {
         string(name: 'prueba', defaultValue: 'pruebita')
