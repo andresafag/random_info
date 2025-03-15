@@ -31,9 +31,7 @@ pipeline {
             steps {
                 echo 'Deploying...failing'
                 sh '''
-                  cd C:/Users/Andres/terra2/
-                  pwd
-                  terraform state list
+                  aws rds describe-db-instances --region $AWS_DEFAULT_REGION --profile danielsso --aws-access-key-id $AWS_ACCESS_KEY_ID --aws-secret-access-key $AWS_SECRET_ACCESS_KEY
                 '''
             }
         }
