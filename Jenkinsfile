@@ -29,7 +29,7 @@ pipeline {
                 }
             }
             steps {
-                echo 'Deploying...failing'
+                echo 'Deploying...succeding'
                 sh '''
                   aws rds describe-db-instances --region $AWS_DEFAULT_REGION --profile danielitosso 
                 '''
