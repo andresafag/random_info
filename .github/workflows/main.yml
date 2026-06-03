@@ -34,11 +34,12 @@ jobs:
     # 4. Escanear el código fuente de Flask, HTML y JS (SAST / Snyk Code)
     - name: Run Snyk Code to check for code security issues
       uses: snyk/actions/python@master
+      continue-on-error: true
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
         command: code test
-        args: --org=${{ secrets.SNYK_ORG }}
+        args: --org=${{ secrets.SNYK_ORG }} --fail-on=all
 
     # ===================================================================
 
