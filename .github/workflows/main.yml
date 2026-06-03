@@ -1,18 +1,69 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: Deploy Python App to AWS Elastic Beanstalk
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  Explore-GitHub-Actions:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+    # 1. Descargar el código del repositorio de GitHub
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+
+    # 2. Configurar el entorno de Python para pruebas opcionales
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13' 
+
+    # ==================== PASOS DE SNYK (SEGURIDAD) ====================
+    
+    # 3. Escanear dependencias de Python (SCA) en el requirements.txt
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/python@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        command: test
+        args: --skip-unresolved=true
+
+    # 4. Escanear el código fuente de Flask, HTML y JS (SAST / Snyk Code)
+    - name: Run Snyk Code to check for code security issues
+      uses: snyk/actions/python@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        command: code test
+
+    # ===================================================================
+
+    # 5. Compactar el código en un archivo .zip (Excluyendo carpetas innecesarias)
+    - name: Generate Deployment Package
+      run: |
+        zip -r deploy-package.zip . -x "*.git*" ".github*" "venv/*" "__pycache__/*"
+
+    # 6. Configurar las credenciales de AWS utilizando los secretos de GitHub
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1 # Reemplaza con la región de tu Beanstalk
+
+    # 7. Subir el archivo .zip y desplegarlo en Elastic Beanstalk
+    - name: Deploy to AWS Elastic Beanstalk
+      uses: einaregilsson/beanstalk-deploy@v22
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: "Nombre-De-Tu-Aplicacion-En-AWS" # Reemplaza con el nombre de tu app
+        environment_name: "Nombre-De-Tu-Ambiente-En-AWS"   # Reemplaza con el nombre de tu entorno
+        version_label: "build-${{ github.sha }}"
+        region: us-east-1 # Reemplaza con la misma región de arriba
+        deployment_package: deploy-package.zip
+
+
