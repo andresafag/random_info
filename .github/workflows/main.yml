@@ -44,7 +44,7 @@ jobs:
     # 5. Compactar el código en un archivo .zip (Excluyendo carpetas innecesarias)
     - name: Generate Deployment Package
       run: |
-        zip -r deploy-package.zip . -x "*.git*" ".github*" "venv/*" "__pycache__/*"
+        zip -r application.zip . -x "*.git*" ".github*" "Jenkinsfile" 
 
     # 6. Configurar las credenciales de AWS utilizando los secretos de GitHub
     - name: Configure AWS Credentials
@@ -52,7 +52,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1 # Reemplaza con la región de tu Beanstalk
+        aws-region: us-east-1
 
     # 7. Subir el archivo .zip y desplegarlo en Elastic Beanstalk
     - name: Deploy to AWS Elastic Beanstalk
@@ -60,10 +60,10 @@ jobs:
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: "Nombre-De-Tu-Aplicacion-En-AWS" # Reemplaza con el nombre de tu app
-        environment_name: "Nombre-De-Tu-Ambiente-En-AWS"   # Reemplaza con el nombre de tu entorno
+        application_name: "random_rush" 
+        environment_name: "Randomrush-env"  
         version_label: "build-${{ github.sha }}"
-        region: us-east-1 # Reemplaza con la misma región de arriba
-        deployment_package: deploy-package.zip
+        region: us-east-1 
+        deployment_package: application.zip
 
 

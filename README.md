@@ -42,7 +42,6 @@ This project uses the following Python packages:
 | Flask | 3.1.3 |
 | Faker | 40.19.1 |
 | pytest | 9.0.3 |
-| helpers | 0.2.0 |
 
 ---
 
