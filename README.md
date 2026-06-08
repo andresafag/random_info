@@ -1,6 +1,6 @@
 # Random Rush 🌩️
 
-![Random Rush](./static/randomrush.png)
+![Random Rush](./static/randomrush.png) Try it out!
 
 ## 📌 Overview
 
