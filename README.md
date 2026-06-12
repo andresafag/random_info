@@ -1,140 +1,161 @@
 # Random Rush 🌩️
 
-[![Python](https://img.shields.io/badge/python-3.13-blue?logo=python&logoColor=white)](https://www.python.org/) [![Flask](https://img.shields.io/badge/Flask-3.1.3-000000?logo=flask&logoColor=white)](https://flask.palletsprojects.com/) [![Faker](https://img.shields.io/badge/Faker-40.19.1-ff6f00)](https://faker.readthedocs.io/) [![Jinja2](https://img.shields.io/badge/Jinja2-3.1.6-ff5722)](https://palletsprojects.com/p/jinja/) [![Requests](https://img.shields.io/badge/Requests-2.34.2-4c8bf5)](https://docs.python-requests.org/) [![pytest](https://img.shields.io/badge/pytest-9.0.3-000000?logo=pytest&logoColor=white)](https://docs.pytest.org/) [![Jenkins](https://img.shields.io/badge/CI-Jenkins-blue?logo=jenkins&logoColor=white)](https://www.jenkins.io/) [![Elastic Beanstalk](https://img.shields.io/badge/AWS-Elastic%20Beanstalk-232f3e?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/elasticbeanstalk/) [![virtualenv](https://img.shields.io/badge/virtualenv-env-green)](https://virtualenv.pypa.io/)
+[![Python](https://img.shields.io/badge/python-3.11-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.1.3-000000?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![Faker](https://img.shields.io/badge/Faker-40.19.1-ff6f00)](https://faker.readthedocs.io/)
+[![Terraform](https://img.shields.io/badge/Terraform-IaC-7B42BC?logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![AWS Lambda](https://img.shields.io/badge/AWS-Lambda-FF9900?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/lambda/)
+[![Amazon ECR](https://img.shields.io/badge/AWS-ECR-FF9900?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/ecr/)
+[![API Gateway](https://img.shields.io/badge/AWS-API%20Gateway-FF9900?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/api-gateway/)
+[![Docker](https://img.shields.io/badge/Docker-container-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 
-![Random Rush](./static/randomrush.png) 
+![Random Rush](./static/randomrush.png)
 
-## 📌 Overview
+## Overview
 
-`Random Rush` is a Flask-based web application that generates random data using the `Faker` library. It delivers a simple UI to select random content categories, request multiple items, and download results as CSV.
+**Random Rush** is a serverless web application that generates random fake data across multiple categories using the [Faker](https://faker.readthedocs.io/) library. Select a category, choose how many results you need, pick a locale, and download everything as a CSV — all from a browser, no setup required.
 
-This project is currently deployed to AWS Elastic Beanstalk at:
-
-[Random Rush](http://randomrush-env.eba-597ha33i.us-east-1.elasticbeanstalk.com) Try it out!
-
----
-
-## 🚀 Features
-
-- Generate random data for categories such as:
-  - `name`, `address`, `date`, `text`, `credit_card`, `email`, `phone_number`, `colors`, `company`
-- Support for localized fake data via Faker locales
-- Download generated results as a CSV file
-- Flask templates for a polished front-end experience
-- CI/CD pipeline skeleton using Jenkins
+🔗 **Live app:** [https://i6ie3zeuy7.execute-api.us-east-1.amazonaws.com](https://i6ie3zeuy7.execute-api.us-east-1.amazonaws.com)
 
 ---
 
-## 🧱 Project Structure
+## Features
 
-- `application.py` — Flask application entry point
-- `templates/` — Jinja2 HTML templates for UI and results
-- `static/` — CSS and static assets
-- `requirements.txt` — Python package dependencies
-- `Jenkinsfile` — simple Jenkins pipeline for build/deploy automation
-
----
-
-## 📦 Dependencies
-
-This project uses the following Python packages:
-
-| Package | Version |
-|--------|---------|
-| Flask | 3.1.3 |
-| Faker | 40.19.1 |
-| pytest | 9.0.3 |
+- Generate random data for: `name`, `address`, `date`, `text`, `credit_card`, `email`, `phone_number`, `colors`, `company`
+- Locale support for internationalized fake data
+- Download results as a CSV file
+- Fully serverless — no servers to manage
 
 ---
 
-## 🌐 Application Routes
+## Tech Stack
 
-- `/` — Main landing page
-- `/allow/<selection>` — Selection page for a content category
-- `/allow/<results>/<int:digit>/<locale>` — Generate `digit` fake items for `results` using the specified locale
-- `/allow/<results>/<int:digit>/<start>/<end>/` — Generate `digit` random dates between `start` and `end`
-- `/download/<params>/` — Download JSON-encoded results as CSV
+| Layer | Technology |
+|---|---|
+| Application | Python 3.11, Flask 3.1.3, Faker |
+| Containerization | Docker (AWS Lambda base image) |
+| Container Registry | Amazon ECR |
+| Compute | AWS Lambda (container image) |
+| HTTP Endpoint | Amazon API Gateway HTTP API (v2) |
+| IAM | AWS IAM role with `AWSLambdaBasicExecutionRole` |
+| Infrastructure as Code | Terraform |
+| State Backend | S3 (with native S3 locking) |
 
-Example:
+---
 
-```text
-/allow/first_name/3/en
+## Architecture
+
+```
+User → API Gateway HTTP API → Lambda (container) → Flask app
+                                      ↑
+                               Image pulled from ECR
 ```
 
----
+Terraform provisions all resources in the correct dependency order:
 
-## ☁️ AWS Elastic Beanstalk Deployment
-
-This application is designed to run on AWS Elastic Beanstalk with a Python environment.
-
-### Recommended steps
-
-1. Initialize your EB application and environment:
-   ```bash
-   eb init -p python-3.13 randomrush
-   eb create randomrush-env
-   ```
-2. Deploy the application:
-   ```bash
-   eb deploy
-   ```
-3. Verify the environment and logs:
-   ```bash
-   eb logs
-   ```
+1. **ECR repository** — stores the Docker image
+2. **Docker build & push** — builds the image locally and pushes it to ECR
+3. **IAM role** — execution role for Lambda
+4. **Lambda function** — runs the container image
+5. **API Gateway** — HTTP API with a `$default` catch-all route to Lambda
 
 ---
 
-## 🔧 Jenkins Pipeline Overview
+## Infrastructure Deployment
 
-The included `Jenkinsfile` defines a basic pipeline with:
+### Prerequisites
 
-- `Build` stage — prints build info
-- `Deploy` stage — conditional execution based on environment variables and parameters
-- `aws rds describe-db-instances` command as a placeholder for AWS interaction
+- [Terraform](https://developer.hashicorp.com/terraform/install) >= 1.0
+- [Docker](https://docs.docker.com/get-docker/)
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) configured with credentials that have permissions for ECR, Lambda, IAM, and API Gateway
 
-> Note: This pipeline currently uses AWS CLI and a profile named `danielitosso`. Update the profile and region before use.
-
----
-
-## � GitHub Actions Workflow
-
-The repository includes a GitHub Actions workflow at `.github/workflows/main.yml` that automates deployment to AWS Elastic Beanstalk.
-
-What it does:
-
-- Checks out the repository code using `actions/checkout`
-- Sets up Python 3.13 with `actions/setup-python`
-- Runs Snyk dependency and source scans for security issues using `snyk/actions/python`
-- Packages the app into `deploy-package.zip`, excluding `.git`, `.github`, `venv`, and `__pycache__`
-- Configures AWS credentials from GitHub Secrets (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`)
-- Deploys the package to Elastic Beanstalk using `einaregilsson/beanstalk-deploy`
-
-> Make sure to update `application_name` and `environment_name` in the workflow to match your AWS Elastic Beanstalk application and environment.
-
----
-
-## �🧪 Testing
-
-The project includes `pytest` as a dependency. Add tests under a `tests/` folder and run:
+### 1. Create the S3 backend bucket
 
 ```bash
-pytest
+cd infra/bootstrap
+terraform init
+terraform apply -var='bucket_name=your-unique-bucket-name' -auto-approve
+```
+
+Note the `bucket_name` output.
+
+### 2. Deploy the full stack
+
+```bash
+cd infra
+terraform init \
+  -backend-config="bucket=YOUR_BUCKET_NAME" \
+  -backend-config="region=us-east-1"
+
+terraform apply -var='aws_region=us-east-1' -auto-approve
+```
+
+Terraform will:
+- Create the ECR repository
+- Build the Docker image from the project root and push it to ECR
+- Create the Lambda function using the pushed image
+- Create the API Gateway HTTP API wired to Lambda
+
+The `api_endpoint` output is your live URL.
+
+### Tear down
+
+```bash
+terraform destroy -var='aws_region=us-east-1' -auto-approve
+```
+
+### Updating the application
+
+After modifying application code, rebuild and push the image, then update Lambda:
+
+```bash
+cd infra
+terraform taint module.ecr.null_resource.docker_build_and_push
+terraform apply -var='aws_region=us-east-1' -auto-approve
+
+aws lambda update-function-code \
+  --function-name random-info-web-adapter \
+  --image-uri <account>.dkr.ecr.us-east-1.amazonaws.com/random-info-app:latest \
+  --region us-east-1
 ```
 
 ---
 
-## 💡 Notes
+## Terraform Module Reference
 
-- The app uses `Faker` locale support for localized random data.
-- The route configuration must match the URL exactly.
-- If deploying to Elastic Beanstalk, ensure the Python runtime and dependencies are correctly specified.
+| Module | Purpose |
+|---|---|
+| `modules/ecr` | Creates the ECR repo and runs `docker build` + `docker push` via `local-exec` |
+| `modules/iam` | Creates the Lambda execution IAM role |
+| `modules/lambda` | Creates the Lambda function from the ECR container image |
+| `modules/apigateway` | Creates the HTTP API, integration, route, stage, and Lambda permission |
+
+### Key variables (`infra/variable.tf`)
+
+| Variable | Default | Description |
+|---|---|---|
+| `aws_region` | `us-east-1` | AWS region |
+| `ecr_repo_name` | `random-info-app` | ECR repository name |
+| `image_tag` | `latest` | Docker image tag |
+| `lambda_name` | `random-info-web-adapter` | Lambda function name |
 
 ---
 
-## 📝 License
+## Application Routes
 
-This repository is ready for extension and production hardening. Add your license details here if needed.
+| Route | Description |
+|---|---|
+| `GET /` | Landing page |
+| `GET /allow/<category>` | Selection page for a category |
+| `GET /allow/<category>/<count>/<locale>` | Generate `count` items using Faker locale |
+| `GET /allow/<category>/<count>/<start>/<end>/` | Generate random dates between two dates |
+| `POST /download/` | Download current results as CSV |
 
+---
 
+## Notes
 
+- Docker and AWS CLI must be available locally when running `terraform apply` — the ECR module uses `local-exec` to build and push the image.
+- For CI/CD pipelines, build and push the image in the pipeline first, then run `terraform apply` with the image already in ECR.
+- Lambda uses `x86_64` architecture matching the `linux/amd64` Docker build platform.
+- The WSGI adapter is `serverless-wsgi`, which handles API Gateway HTTP API v2 payload format natively.
