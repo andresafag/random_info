@@ -1,6 +1,8 @@
 # Random Rush 🌩️
 
-![Random Rush](./static/randomrush.png) Try it out!
+[![Python](https://img.shields.io/badge/python-3.13-blue?logo=python&logoColor=white)](https://www.python.org/) [![Flask](https://img.shields.io/badge/Flask-3.1.3-000000?logo=flask&logoColor=white)](https://flask.palletsprojects.com/) [![Faker](https://img.shields.io/badge/Faker-40.19.1-ff6f00)](https://faker.readthedocs.io/) [![Jinja2](https://img.shields.io/badge/Jinja2-3.1.6-ff5722)](https://palletsprojects.com/p/jinja/) [![Requests](https://img.shields.io/badge/Requests-2.34.2-4c8bf5)](https://docs.python-requests.org/) [![pytest](https://img.shields.io/badge/pytest-9.0.3-000000?logo=pytest&logoColor=white)](https://docs.pytest.org/) [![Jenkins](https://img.shields.io/badge/CI-Jenkins-blue?logo=jenkins&logoColor=white)](https://www.jenkins.io/) [![Elastic Beanstalk](https://img.shields.io/badge/AWS-Elastic%20Beanstalk-232f3e?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/elasticbeanstalk/) [![virtualenv](https://img.shields.io/badge/virtualenv-env-green)](https://virtualenv.pypa.io/)
+
+![Random Rush](./static/randomrush.png) 
 
 ## 📌 Overview
 
@@ -8,7 +10,7 @@
 
 This project is currently deployed to AWS Elastic Beanstalk at:
 
-[Random Rush](http://randomrush-env.eba-597ha33i.us-east-1.elasticbeanstalk.com)
+[Random Rush](http://randomrush-env.eba-597ha33i.us-east-1.elasticbeanstalk.com) Try it out!
 
 ---
 

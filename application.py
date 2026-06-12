@@ -1,9 +1,11 @@
-from flask import Flask, render_template, send_file 
+from flask import Flask, render_template, Response, request
 from faker import Faker
 import datetime
 import csv
+import io
 import json
 import urllib.parse
+import serverless_wsgi
 
 
 allowed_results=("name","address","date","text","credit_card","email","phone_number","colors","company")
@@ -49,22 +51,24 @@ def resultsbetween(results, digit,start,end):
     
     return render_template("results.html", results=instancess, digit=digit) 
 
-@application.route("/download/<params>/")
-def download(params):
-    decoded_params = urllib.parse.unquote(params)
+@application.route("/download/", methods=["POST"])
+def download():
     try:
-        allData = json.loads(decoded_params)
-        filename = "output.csv"
-        with open(filename, mode='w', newline='', encoding='utf-8') as file: # Se añade encoding utf-8 para caracteres especiales
-            writer = csv.writer(file)
-            for row in allData:
-                writer.writerow([row])
-                
-        return send_file(filename, as_attachment=True, download_name="output.csv", mimetype="text/csv")
-        
-    except json.JSONDecodeError:
-        return "Invalid JSON format", 400
+        allData = request.get_json()
+        output = io.StringIO()
+        writer = csv.writer(output)
+        for row in allData:
+            writer.writerow([row])
+        return Response(
+            output.getvalue(),
+            mimetype="text/csv",
+            headers={"Content-Disposition": "attachment; filename=output.csv"}
+        )
+    except Exception:
+        return "Invalid data", 400
 
+def handler(event, context):
+    return serverless_wsgi.handle_request(application, event, context)
 
 if __name__ == '__main__':
     application.run(host="0.0.0.0", port=5000)
