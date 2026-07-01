@@ -49,11 +49,6 @@ jobs:
 
     - name: Run tests
       run: pytest tests/ -v
-    - name: Debug OIDC token
-      run: |
-        TOKEN=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=sts.amazonaws.com" \
-          -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}")
-        echo $TOKEN | jq .
 
   deploy:
     needs: ci
