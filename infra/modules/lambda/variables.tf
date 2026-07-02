@@ -1,6 +1,7 @@
 variable "function_name" {
   description = "Lambda function name"
   type        = string
+  default = "random-info-web-adapter"
 }
 
 variable "repository_url" {

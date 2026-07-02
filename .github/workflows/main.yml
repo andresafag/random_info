@@ -84,10 +84,15 @@ jobs:
           --output type=docker \
           -f Dockerfile \
           -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
-          -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
           .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+    - name: LAmbda image update
+      env:
+        ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+      run: |
+        aws lambda update-function-code \
+          --function-name ${{ env.LAMBDA_NAME }} \
+          --image-uri ${{ steps.ecr-login.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
 
     # ==================== TERRAFORM ====================
 
@@ -108,7 +113,6 @@ jobs:
           -var="aws_region=${{ env.AWS_REGION }}" \
           -var="image_tag=${{ github.sha }}" \
           -target=module.iam \
-          -target=module.lambda \
           -target=module.apigateway \
           -target=module.ecr.aws_ecr_repository.this
 
@@ -120,6 +124,5 @@ jobs:
           -var="aws_region=${{ env.AWS_REGION }}" \
           -var="image_tag=${{ github.sha }}" \
           -target=module.iam \
-          -target=module.lambda \
           -target=module.apigateway \
           -target=module.ecr.aws_ecr_repository.this
