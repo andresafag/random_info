@@ -231,7 +231,7 @@ Use this flow for first-time setup or when running outside CI.
 ```bash
 cd infra/bootstrap
 terraform init
-terraform apply -var='bucket_name=your-unique-bucket-name' -auto-approve
+terraform apply -var='bucket_name=unique-bucket-name' -auto-approve
 ```
 
 Note the `bucket_name` output — you will need it in the next step.
@@ -257,7 +257,7 @@ docker push $ACCOUNT.dkr.ecr.$REGION.amazonaws.com/$REPO:latest
 ```bash
 cd infra
 terraform init \
-  -backend-config="bucket=YOUR_BUCKET_NAME" \
+  -backend-config="bucket=BUCKET_NAME" \
   -backend-config="region=us-east-1"
 
 terraform apply \
@@ -266,7 +266,7 @@ terraform apply \
   -auto-approve
 ```
 
-The `api_endpoint` output is your live URL. 🎉
+The `api_endpoint` output is the live URL. 🎉
 
 ### Tear down
 
@@ -278,10 +278,9 @@ terraform destroy -var='aws_region=us-east-1' -auto-approve
 
 ---
 
-## 🧪 Running Tests Locally
+## 🧪 Running Tests 
 
 ```bash
-pip install -r requirements.txt
 pytest tests/ -v
 ```
 

@@ -73,7 +73,7 @@ jobs:
       id: ecr-login
       uses: aws-actions/amazon-ecr-login@v2
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Build, tag, and push image to Amazon 
       env:
         ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
         IMAGE_TAG: ${{ github.sha }}
