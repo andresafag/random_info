@@ -111,18 +111,14 @@ jobs:
 
           EXIT_CODE=$?
 
-          echo "================================="
-              
           echo "Terraform exit code: $EXIT_CODE"
-          echo "================================="
-              
           echo "plan_exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
-              
+
           if [ "$EXIT_CODE" -eq 1 ]; then
             echo "Terraform plan failed."
             exit 1
           fi
-              
+
           exit 0
 
       - name: Terraform Apply
