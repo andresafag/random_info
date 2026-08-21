@@ -108,7 +108,7 @@ jobs:
 
       - name: Terraform Apply
         working-directory: infra
-        if: steps.plan.outputs.tfplan_exitcode == 2
+        if: steps.plan.outputs.plan_exitcode == 2
         run: |
           terraform apply \
             -auto-approve \
