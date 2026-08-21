@@ -106,8 +106,7 @@ jobs:
             -target=module.lambda \
             -target=module.apigateway \
             -target=module.ecr.aws_ecr_repository.this \
-            -detailed-exitcode \
-            -out=tfplan
+            -detailed-exitcode
 
           EXIT_CODE=$?
 
