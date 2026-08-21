@@ -106,6 +106,14 @@ jobs:
             -target=module.ecr.aws_ecr_repository.this \
             -detailed-exitcode -out=tfplan
 
+          EXIT_CODE=$?
+          echo "plan_exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT
+          
+          if [ $EXIT_CODE -eq 1 ]; then
+            echo "Terraform plan failed with an error."
+            exit 1
+          fi
+
       - name: Terraform Apply
         working-directory: infra
         if: steps.plan.outputs.plan_exitcode == 2
