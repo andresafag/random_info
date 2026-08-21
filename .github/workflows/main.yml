@@ -105,11 +105,13 @@ jobs:
             -target=module.lambda \
             -target=module.apigateway \
             -target=module.ecr.aws_ecr_repository.this \
-            -detailed-exitcode -out=tfplan
+            -detailed-exitcode -out=tfplan || EXIT_CODE=$?
 
-          EXIT_CODE=$?
+          EXIT_CODE=${EXIT_CODE:-0}
+
           echo "plan_exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT
-          
+          echo "Captured exit code: $EXIT_CODE"
+
           if [ $EXIT_CODE -eq 1 ]; then
             echo "Terraform plan failed with an error."
             exit 1
@@ -119,14 +121,7 @@ jobs:
         working-directory: infra
         if: steps.plan.outputs.plan_exit_code == 2
         run: |
-          terraform apply \
-            -auto-approve \
-            -var="aws_region=${{ env.AWS_REGION }}" \
-            -var="image_tag=${{ github.sha }}" \
-            -target=module.iam \
-            -target=module.lambda \
-            -target=module.apigateway \
-            -target=module.ecr.aws_ecr_repository.this
+          terraform apply -auto-approve tfplan
 
       # ==================== DOCKER BUILD & PUSH ====================
 
