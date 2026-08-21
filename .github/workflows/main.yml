@@ -121,10 +121,10 @@ jobs:
 
           exit 0
 
-            - name: Terraform Apply
-              working-directory: infra
-              if: steps.plan.outputs.plan_exit_code == '2'
-              run: |
+      - name: Terraform Apply
+        working-directory: infra
+        if: steps.plan.outputs.plan_exit_code == '2'
+        run: |
           terraform apply -auto-approve tfplan
 
       # ==================== DOCKER BUILD & PUSH ====================
