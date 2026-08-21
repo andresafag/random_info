@@ -118,7 +118,7 @@ jobs:
             echo "Terraform plan failed."
             exit 1
           fi
-
+          echo "Terraform plan completed successfully. Code $EXIT_CODE"
           exit 0
 
       - name: Terraform Apply
