@@ -1,4 +1,5 @@
-# Random Rush 🌩️
+![Random Rush](randomrush.jpeg)
+
 
 [![Python](https://img.shields.io/badge/python-3.11-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.1.3-000000?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
@@ -11,7 +12,6 @@
 [![CI/CD](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-2088FF?logo=github-actions&logoColor=white)](https://github.com/features/actions)
 [![Snyk](https://img.shields.io/badge/Snyk-security-4C4A73?logo=snyk&logoColor=white)](https://snyk.io/)
 
-![Random Rush](./static/randomrush.png)
 
 ## 📌 Overview
 
