@@ -68,6 +68,9 @@ def download():
         return "Invalid data", 400
 
 def handler(event, context):
+    if not event or "httpMethod" not in event and "rawPath" not in event:
+        print("Lambda warmup ping received. Keeping container alive!")
+        return {"statusCode": 200, "body": "warmed"}
     return serverless_wsgi.handle_request(application, event, context)
 
 if __name__ == '__main__':
