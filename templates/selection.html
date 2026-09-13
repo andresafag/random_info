@@ -10,6 +10,7 @@
   <div id="content">
     <h2>Choose which data you'd go for</h2>
       <div>
+        {% block select %}
         {% raw %}
         <select>
             <option value="zu_ZA">Zulu (South Africa)</option>
@@ -52,7 +53,8 @@
         </select>
 
        
-{% endraw %}
+        {% endraw %}
+        {% endblock %}
       </div>
       {% block content %}{% endblock %}    
   </div>
@@ -109,11 +111,10 @@ for (const element of selection) {
       
       // add event listener to the generate button
       generate.addEventListener("click", function () {
-          
+          console.log(chosen)
           if (chosen == "date_between" && num.value < 101) {
             dateChosenStart < dateChosenEnd ? window.location=`${chosen}/${num.value}/${dateChosenStart}/${dateChosenEnd}/` : alert('the start date goes before the end end date')
           } else if (!chosen.includes("between") && chosen.includes("date") && num.value < 101) {
-            // let language_locale = document.querySelector('select').value
             window.location=`${chosen}/${num.value}/en`
           } else {
             let language_locale = document.querySelector('select').value

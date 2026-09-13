@@ -28,7 +28,7 @@ def selection(selection):
 
 @application.route("/allow/<results>/<int:digit>/<locale>")
 def results(results, digit, locale):
-    fake=Faker(locale)
+    fake = Faker(locale)
     instancess=[]
     instances=[getattr(fake,results)() for i in range(digit)]
        
